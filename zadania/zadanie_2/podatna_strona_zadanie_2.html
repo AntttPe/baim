@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Panel Użytkownika</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        #hello { font-size: 24px; font-weight: bold; color: darkblue; }
+    </style>
+</head>
+<body>
+    <h1>Panel profilu</h1>
+    
+    <div id="hello">Ładowanie powitania...</div>
+
+    <script>
+        // PODATNOŚĆ (DOM-based XSS): Kod bezpośrednio ze slajdu nr 8
+        // Źródło: location.hash
+        // Sink: innerHTML
+        
+        setTimeout(() => {
+            const name = decodeURIComponent(location.hash.slice(1));
+            
+            if (name) {
+                document.getElementById('hello').innerHTML = 'Witaj, ' + name + '!';
+            } else {
+                document.getElementById('hello').innerHTML = 'Witaj, nieznajomy! (Dodaj #TwojeImie w URL)';
+            }
+        }, 500); // Małe opóźnienie dla symulacji ładowania
+    </script>
+</body>
+</html>

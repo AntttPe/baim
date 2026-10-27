@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Sklep - Wyszukiwarka</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .search-box { margin-bottom: 20px; }
+        #results-container { padding: 15px; border: 1px solid #ccc; background: #f9f9f9; }
+    </style>
+</head>
+<body>
+    <h1>Wyszukiwarka produktów</h1>
+    
+    <div class="search-box">
+        <form method="GET" action="">
+            <input type="text" name="q" placeholder="Czego szukasz?">
+            <button type="submit">Szukaj</button>
+        </form>
+    </div>
+
+    <div id="results-container">
+        <!-- Tutaj ładujemy wyniki na podstawie URL -->
+        Wyniki dla: <span id="search-query"></span>
+    </div>
+
+    <script>
+        // Symulacja zachowania serwera (Reflected), który odbija wartość parametru 'q'
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q');
+        
+        if(q) {
+            // PODATNOŚĆ: Zobacz na slajd 12! Używamy innerHTML zamiast textContent
+            document.getElementById('search-query').innerHTML = q;
+        } else {
+            document.getElementById('search-query').innerText = "brak zapytania";
+        }
+    </script>
+</body>
+</html>
